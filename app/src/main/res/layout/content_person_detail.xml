@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".PersponDetail"
+    tools:showIn="@layout/activity_perspon_detail">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:paddingLeft="10dp"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+        android:text="Biography"/>
+    <TextView
+       android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:id="@+id/biography"
+        android:text="Biography"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="Expend"
+        android:gravity="center"
+        android:text="Read More"
+        tools:ignore="OnClick" />
+<TextView
+    android:layout_marginTop="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+    android:text="Tv Cast"/>
+
+   <android.support.v7.widget.RecyclerView
+       android:layout_width="wrap_content"
+       android:id="@+id/TvCastRecyclerview"
+       android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:text="Movie Cast"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="wrap_content"
+        android:id="@+id/MovieCastRecyclerview"
+        android:layout_height="wrap_content"/>
+
+
+</LinearLayout>
+</android.support.v4.widget.NestedScrollView>
