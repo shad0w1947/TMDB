@@ -1,5 +1,6 @@
 package com.example.shad0w.tmdb;
 
+import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,8 @@ import android.view.ViewGroup;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class LargeAdapter extends RecyclerView.Adapter<NowShowingHolder> {
 
@@ -22,6 +25,11 @@ public class LargeAdapter extends RecyclerView.Adapter<NowShowingHolder> {
     int type;
     GenreHas map;
 
+    DaoClass daoClass;
+    List<DatabaseTable> databaseTable;
+    HashMap<Long,Integer> datamap;
+
+
 
     public LargeAdapter(Context context, ArrayList<MovieResult> MovieResults, ArrayList<TvResult> TvResults, boolean size, int type, Clicklistener clicklistener) {
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -31,6 +39,8 @@ public class LargeAdapter extends RecyclerView.Adapter<NowShowingHolder> {
 
         this.clicklistener = clicklistener;
         this.size = size;
+
+
     }
 
     @NonNull
@@ -49,8 +59,20 @@ public class LargeAdapter extends RecyclerView.Adapter<NowShowingHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NowShowingHolder nowShowingHolder, final int i) {
+    public void onBindViewHolder(@NonNull final NowShowingHolder nowShowingHolder, final int i) {
         Log.i("adapter", "called");
+
+
+        datamap=new HashMap<>();
+        DataBase dataBase= Room.databaseBuilder(nowShowingHolder.item.getContext(),DataBase.class,"database_db").allowMainThreadQueries().build();
+        daoClass=dataBase.getDaoClass();
+        databaseTable=daoClass.getAll();
+        for(int j=0;j<databaseTable.size();j++)
+        {
+            datamap.put(databaseTable.get(j).getTypeId(),databaseTable.get(j).getType());
+        }
+
+
         if (type == Contact.Movie) {
             MovieResult result = MovieResultArrayList.get(i);
             String genre = "";
@@ -59,6 +81,15 @@ public class LargeAdapter extends RecyclerView.Adapter<NowShowingHolder> {
                     genre = genre + map.getString(result.getGenreIds().get(j));
                 else
                     genre = genre + map.getString(result.getGenreIds().get(j)) + ",";
+            }
+            if(datamap.containsKey(result.getId()))
+            {
+                nowShowingHolder.likeButton.setBackground(nowShowingHolder.likeButton.getResources().getDrawable(R.drawable.ic_favorite_red_300_24dp,null));
+
+            }
+            else {
+                nowShowingHolder.likeButton.setBackground(nowShowingHolder.likeButton.getResources().getDrawable(R.drawable.ic_favorite_border_black_24dp,null));
+
             }
             nowShowingHolder.Genre.setText(genre);
             nowShowingHolder.Name.setText(result.getOriginalTitle());
@@ -69,6 +100,28 @@ public class LargeAdapter extends RecyclerView.Adapter<NowShowingHolder> {
                 @Override
                 public void onClick(View view) {
                     clicklistener.itemClick(view, i);
+                }
+            });
+            nowShowingHolder.likeButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MovieResult result=MovieResultArrayList.get(i);
+                    DatabaseTable table=new DatabaseTable(result.getId(),Contact.Movie);
+                    if(datamap.containsKey(result.getId()))
+                    {
+                        nowShowingHolder.likeButton.setBackground(nowShowingHolder.likeButton.getResources().getDrawable(R.drawable.ic_favorite_border_black_24dp,null));
+                        datamap.remove(result.getId());
+                        daoClass.deleteItem(table);
+                    }
+                    else
+                    {
+
+                        daoClass.addItem(table);
+                        datamap.put(result.getId(),Contact.Movie);
+                        nowShowingHolder.likeButton.setBackground(nowShowingHolder.likeButton.getResources().getDrawable(R.drawable.ic_favorite_red_300_24dp,null));
+
+                    };
+                        // clicklistener.itemClick(v,i);
                 }
             });
         } else {

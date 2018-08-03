@@ -1,6 +1,7 @@
 package com.example.shad0w.tmdb;
 
 
+import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -61,6 +64,11 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
     LargeAdapter largeAdapterPopular;
     Clicklistener clicklistenerPopular;
 
+
+    DaoClass daoClass;
+    List<DatabaseTable> databaseTable;
+    HashMap<Long,Integer> datamap;
+
     public MovieFragment() {
         // Required empty public constructor
     }
@@ -77,7 +85,14 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
         root = output.findViewById(R.id.root);
 
         progressBar = output.findViewById(R.id.progress_bar);
-
+        datamap=new HashMap<>();
+        DataBase dataBase= Room.databaseBuilder(getContext().getApplicationContext(),DataBase.class,"database_db").allowMainThreadQueries().build();
+        daoClass=dataBase.getDaoClass();
+        databaseTable=daoClass.getAll();
+        for(int i=0;i<databaseTable.size();i++)
+        {
+            datamap.put(databaseTable.get(i).getTypeId(),databaseTable.get(i).getType());
+        }
 
         ViewallNowShowing = output.findViewById(R.id.movie_fragment_NowShowing_viewAll);
         ViewallNowShowing.setOnClickListener(this);
@@ -86,8 +101,12 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
         clicklistenerNowShowing = new Clicklistener() {
             @Override
             public void itemClick(View view, int position) {
+                if(view.getId()==R.id.like_button){
+                   return;
+                }
+                else{
                 MovieResult result = arrayListNowShowing.get(position);
-                detialActivity(result.getId(),result.getTitle());
+                detialActivity(result.getId(),result.getTitle());}
             }
         };
         largeAdapterNowShowing = new LargeAdapter(getContext(), arrayListNowShowing, null, Contact.Largeview, Contact.Movie, clicklistenerNowShowing);
@@ -169,16 +188,16 @@ public class MovieFragment extends Fragment implements View.OnClickListener {
         Call<MoviePojo> call;
 
         if (recyclerView == recyclerViewPopular) {
-            call = retroservice.getPopularMovie(API.getApi(), 1);
+            call = retroservice.getPopularMovie(API.getApi(), Contact.Language,1);
             //isPopular=true;
         } else if (recyclerView == recyclerViewToprated) {
-            call = retroservice.getTopratedMovie(API.getApi(), 1);
+            call = retroservice.getTopratedMovie(API.getApi(), Contact.Language,1);
             //isToprated=true;
         } else if (recyclerView == recyclerViewUpcoming) {
-            call = retroservice.getUpcomingMovie(API.getApi(), 1);
+            call = retroservice.getUpcomingMovie(API.getApi(), Contact.Language,1);
             //isUpcoming=true;
         } else {
-            call = retroservice.getNowShowingMovie(API.getApi(), 1);
+            call = retroservice.getNowShowingMovie(API.getApi(), Contact.Language,1);
             //isNowShowing=true;
         }
         call.enqueue(new Callback<MoviePojo>() {

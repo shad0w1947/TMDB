@@ -1,6 +1,7 @@
 package com.example.shad0w.tmdb;
 
 
+import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,6 +35,10 @@ public class SearchMovieFragment extends Fragment {
     RecyclerView recyclerView;
     String query="shiv";
     int page=1;
+
+
+
+
 
 
     public SearchMovieFragment() {

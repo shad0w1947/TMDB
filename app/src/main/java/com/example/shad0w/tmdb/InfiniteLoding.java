@@ -133,13 +133,13 @@ public class InfiniteLoding extends AppCompatActivity {
             Call<MoviePojo> call;
 
             if (Catagory.equals(Contact.NowShowingMovie))
-                call = retroservice.getNowShowingMovie(API.getApi(), page);
+                call = retroservice.getNowShowingMovie(API.getApi(), Contact.Language,page);
             else if (Catagory.equals(Contact.PopularMovie))
-                call = retroservice.getPopularMovie(API.getApi(), page);
+                call = retroservice.getPopularMovie(API.getApi(),Contact.Language, page);
             else if (Catagory.equals(Contact.PopularMovie))
-                call = retroservice.getPopularMovie(API.getApi(), page);
+                call = retroservice.getPopularMovie(API.getApi(),Contact.Language, page);
             else
-                call = retroservice.getUpcomingMovie(API.getApi(), page);
+                call = retroservice.getUpcomingMovie(API.getApi(),Contact.Language, page);
 
             call.enqueue(new Callback<MoviePojo>() {
                 @Override
@@ -167,11 +167,11 @@ public class InfiniteLoding extends AppCompatActivity {
             if (Catagory.equals(Contact.AiringTodayTvshow))
                 call = retroservice.getAiringTodayTv(API.getApi(), page);
             else if (Catagory.equals(Contact.PopularMovie))
-                call = retroservice.getPopularTv(API.getApi(), page);
+                call = retroservice.getPopularTv(API.getApi(),Contact.Language, page);
             else if (Catagory.equals(Contact.TopratedTvShow))
-                call = retroservice.getTopratedTv(API.getApi(), page);
+                call = retroservice.getTopratedTv(API.getApi(),Contact.Language, page);
             else
-                call = retroservice.getOnairTv(API.getApi(), page);
+                call = retroservice.getOnairTv(API.getApi(),Contact.Language, page);
 
             call.enqueue(new Callback<TvPojo>() {
                 @Override

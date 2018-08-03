@@ -1,6 +1,7 @@
 package com.example.shad0w.tmdb;
 
 import android.app.SearchManager;
+import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,11 +22,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.HashMap;
+import java.util.List;
+
 public class Launcher extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     Fragment fragment;
     Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +70,8 @@ public class Launcher extends AppCompatActivity
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.launcher, menu);
 //        SearchManager manager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+
+
 
         final SearchView search = (SearchView) menu.findItem(R.id.action_search).getActionView();
         search.setQueryHint("Search Movie,Tv Show,Person...");
@@ -122,6 +129,7 @@ public class Launcher extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -148,6 +156,7 @@ public class Launcher extends AppCompatActivity
     }
 
     public void setFragment(Fragment fragment) {
+        Bundle bundle=new Bundle();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.launcher_Container, fragment);

@@ -12,6 +12,7 @@ public class NowShowingHolder extends RecyclerView.ViewHolder{
     TextView Name;
     TextView Rating;
     TextView Genre;
+    ImageView likeButton;
 
 
     public NowShowingHolder(@NonNull View itemView) {
@@ -21,5 +22,6 @@ public class NowShowingHolder extends RecyclerView.ViewHolder{
         Rating=itemView.findViewById(R.id.movie_fragment_rating);
         Genre=itemView.findViewById(R.id.movie_fragment_genre);
         item=itemView;
+        likeButton=itemView.findViewById(R.id.like_button);
     }
 }

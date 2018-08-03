@@ -131,7 +131,7 @@ public class PersponDetail extends Activity {
         Retroservice retroservice = retrofit.create(Retroservice.class);
 
         if (choice == forProfile) {
-            Call<PersonDetailPojo> call = retroservice.getPerson(this.id, API.getApi());
+            Call<PersonDetailPojo> call = retroservice.getPerson(this.id, API.getApi(),Contact.Language);
             call.enqueue(new Callback<PersonDetailPojo>() {
                 @Override
                 public void onResponse(Call<PersonDetailPojo> call, Response<PersonDetailPojo> response) {
@@ -151,7 +151,7 @@ public class PersponDetail extends Activity {
             });
         }
         if (choice == forMovie) {
-            Call<MoviePojo> call=retroservice.getMovieCast(id,API.getApi());
+            Call<MoviePojo> call=retroservice.getMovieCast(id,API.getApi(),Contact.Language);
             call.enqueue(new Callback<MoviePojo>() {
                 @Override
                 public void onResponse(Call<MoviePojo> call, Response<MoviePojo> response) {
@@ -168,7 +168,7 @@ public class PersponDetail extends Activity {
 
         }
         if (choice == forTv) {
-            Call<TvPojo> call=retroservice.getTvCast(id,API.getApi());
+            Call<TvPojo> call=retroservice.getTvCast(id,API.getApi(),Contact.Language);
             call.enqueue(new Callback<TvPojo>() {
                 @Override
                 public void onResponse(Call<TvPojo> call, Response<TvPojo> response) {

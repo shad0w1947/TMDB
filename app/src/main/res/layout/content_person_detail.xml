@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:onClick="Expend"
         android:gravity="center"
-        android:text="Read More"
+       
         tools:ignore="OnClick" />
 <TextView
     android:layout_marginTop="20dp"

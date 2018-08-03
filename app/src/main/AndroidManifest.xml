@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:screenOrientation="portrait"
             android:name=".Launcher"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
@@ -22,17 +23,21 @@
             </intent-filter>
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".InfiniteLoding"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".DetailView"
             android:label="@string/title_activity_detail_view" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".PersponDetail"
             android:label="@string/title_activity_perspon_detail" />
 
 
         <activity android:name=".SearchActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>

@@ -168,13 +168,13 @@ public class TvShowFragment extends Fragment implements View.OnClickListener {
         Call<TvPojo> call;
 
         if (recyclerView == recyclerViewPopular) {
-            call = retroservice.getPopularTv(API.getApi(), 1);
+            call = retroservice.getPopularTv(API.getApi(), Contact.Language,1);
             isPopular = true;
         } else if (recyclerView == recyclerViewToprated) {
-            call = retroservice.getTopratedTv(API.getApi(), 1);
+            call = retroservice.getTopratedTv(API.getApi(),Contact.Language, 1);
             isToprated = true;
         } else if (recyclerView == recyclerViewOnTheAir) {
-            call = retroservice.getOnairTv(API.getApi(), 1);
+            call = retroservice.getOnairTv(API.getApi(),Contact.Language, 1);
             isOnTheAir = true;
         } else {
             call = retroservice.getAiringTodayTv(API.getApi(), 1);

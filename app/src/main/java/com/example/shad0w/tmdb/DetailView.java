@@ -211,7 +211,7 @@ public class DetailView extends Activity {
 
 
         if (choice == forPoster) {
-            Call<DetailPojo> call = retroservice.getDetail(this.id, API.getApi());
+            Call<DetailPojo> call = retroservice.getDetail(this.id, API.getApi(),Contact.Language);
             call.enqueue(new Callback<DetailPojo>() {
                 @Override
                 public void onResponse(Call<DetailPojo> call, Response<DetailPojo> response) {
@@ -248,7 +248,7 @@ public class DetailView extends Activity {
 
 
         if (choice == forCast) {
-            Call<CastPojo> call = retroservice.getCast(this.id, API.getApi());
+            Call<CastPojo> call = retroservice.getCast(this.id, API.getApi(),Contact.Language);
             call.enqueue(new Callback<CastPojo>() {
                 @Override
                 public void onResponse(Call<CastPojo> call, Response<CastPojo> response) {
@@ -267,7 +267,7 @@ public class DetailView extends Activity {
 
         }
         if (choice == forMovie) {
-            Call<MoviePojo> call = retroservice.getSimilarMovie(this.id, API.getApi());
+            Call<MoviePojo> call = retroservice.getSimilarMovie(this.id, API.getApi(),Contact.Language);
             call.enqueue(new Callback<MoviePojo>() {
                 @Override
                 public void onResponse(Call<MoviePojo> call, Response<MoviePojo> response) {
@@ -286,7 +286,7 @@ public class DetailView extends Activity {
 
         }
         if (choice == forTvShow) {
-            Call<TvPojo> call = retroservice.getSimilarTv(this.id, API.getApi());
+            Call<TvPojo> call = retroservice.getSimilarTv(this.id, API.getApi(),Contact.Language);
             call.enqueue(new Callback<TvPojo>() {
                 @Override
                 public void onResponse(Call<TvPojo> call, Response<TvPojo> response) {
@@ -306,7 +306,7 @@ public class DetailView extends Activity {
         }
 
         if (choice == forVideo) {
-            Call<VideosPojo> call = retroservice.getVideothumbnail(this.id, API.getApi());
+            Call<VideosPojo> call = retroservice.getVideothumbnail(this.id, API.getApi(),Contact.Language);
             call.enqueue(new Callback<VideosPojo>() {
                 @Override
                 public void onResponse(Call<VideosPojo> call, Response<VideosPojo> response) {
